@@ -161,7 +161,7 @@
             document.getElementById('email').classList.add('is-invalid');
           } else {
             document.getElementById('email').classList.remove('is-invalid');
-            fetch('../assets/js/login.js', {
+            fetch('../assets/php/login.php', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -171,9 +171,10 @@
                 password: password,
               }),
             })
-              .then((response) => {
-                if (response.status === 200) {
-                  window.location.href = '../../index2.html';
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === 'success') {
+                  window.location.href = '../../colegio-alamos/index2.html';
                 } else {
                   displayErrorMessage();
                 }
